@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Form from './Components/Form';
+import Header from './Components/Header';
 
 function App() {
   const [paths, setPaths] = useState([]);
@@ -38,13 +39,11 @@ function App() {
     }
   }
 
-  const handleClear = () => {
-    setPaths([]); // Clear the paths by setting it to an empty array
-  };
-
   return (
     <>
-      <Form onFormSubmit={onFormSubmit} onClear={handleClear}/>
+    <Header />  
+    <p className='text-zinc-400 mx-4 my-4 py-4 px-4'> View the files of a public GitHub Repo below: </p>
+      <Form onFormSubmit={onFormSubmit}/>
       <ul>
         {paths.map((path) => (
           <li key={path.sha}>
