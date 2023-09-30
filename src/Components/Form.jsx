@@ -1,0 +1,49 @@
+import { useState } from 'react'
+
+const Form = ({ onFormSubmit }) => {
+  const [owner, setOwner] = useState('');
+  const [repo, setRepo] = useState('');
+
+  const updateOwner = (e) => {
+    setOwner(e.target.value);
+  }
+
+  const updateRepo = (e) => {
+    setRepo(e.target.value);
+  } 
+
+  const handleButtonClick = (e) => {
+    e.preventDefault()
+    console.log('Owner:', owner);
+    console.log('Repo:', repo);
+    const link = `https://api.github.com/repos/${owner}/${repo}/contents` // + owner + "/" + repo  + "/contents";
+    console.log(link);
+    onFormSubmit(link);
+    setOwner('');
+    setRepo('');
+  };
+
+
+  return (
+    <form className="flex flex-col justify-center items-center">
+      <div className="block mb-2 font-bold">Enter Owner: </div>
+      <input className='w-full py-2 px-4 rounded bg-gray-800 border border-gray-700 text-blue'
+        type="text" 
+        value={owner}
+        onChange={updateOwner}
+      />
+      <div className="block mb-2 font-bold">Enter Repo Name:</div>
+      <input className='w-full py-2 px-4 rounded bg-gray-800 border border-gray-700 text-blue'
+        type="text"
+        value={repo}
+        onChange={updateRepo}
+      />
+      <button type="button" onClick={handleButtonClick} className='w-full py-2 px-4 bg-blue text-black rounded hover:bg-blue-dark'>
+        Submit
+      </button>
+    </form>
+  );
+};
+
+
+export default Form
